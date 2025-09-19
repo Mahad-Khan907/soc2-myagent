@@ -17,7 +17,10 @@ class ChatRequest(BaseModel):
 # Allow React frontend to access API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",  
+        "https://soc2-web.vercel.app"  
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -37,4 +40,5 @@ async def chat(request: ChatRequest):
         )
         return {"response": result.final_output}
     except Exception as e:
+
         raise HTTPException(status_code=500, detail=str(e))
